@@ -1,1 +1,1 @@
-#initializing project
+from battlefield_mod import Battlefield

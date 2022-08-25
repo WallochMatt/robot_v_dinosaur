@@ -7,4 +7,4 @@ class Robot:
         self.active_weapon = Weapon("name", 10) #string, int
     
     def attack(self, dinosaur): #void: no return
-        dinosaur.health = -self.active_weapon.attack_power #subtract the weapon's attack power from the dinsaur hp
+        dinosaur.health = dinosaur.health - self.active_weapon.attack_power #subtract the weapon's attack power from the dinsaur hp

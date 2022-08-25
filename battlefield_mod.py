@@ -18,3 +18,8 @@ class Battlefield:
     def display_winner(self):
         pass
     # ?: if x healt = 0, print the opposite win, so if dino.hp = 0 then robot wins
+
+dino_test = Dinosaur("Test", 50)
+robo_test = Robot("T35T")
+
+robo_test.attack(dino_test)

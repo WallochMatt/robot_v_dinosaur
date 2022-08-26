@@ -1,53 +1,52 @@
+
 from fleet_mod import Fleet
 from herd_mod import Herd
-#i dont know if choice should go in a method here or on fleet page
+
+import random
+
 
 class Battlefield:
     def __init__(self):
-      self.fleet = Fleet()
-      self.herd = Herd()
-        #^^^Random robot/dino in a list, targets another random?
+        self.fleet = Fleet()
+        self.herd = Herd()
+    
 
     def run_game(self):
         self.display_welcome()
         self.battle_phase()
-        #self.display_winner()
-        # ?: running the methods below in here 
+        self.display_winner()
 
     def display_welcome(self):
         print("WELCOME TO DINOSAUR LASER FIGHT")
-        #add user friendly interface
 
-    # def selects_opponents(self):
-    #     if self.fleet.health <= 0:
-                #remove self.fleet
-                #reroll
 
     def battle_phase(self):
-        while (self.fleet.choice.health > 0)  and (self.herd.choice.health > 0): #while fleet and herd have values in the list?
-        #if self.robot.health or self.dinosaur.health > 0:
-            self.fleet.choice.attack(self.herd.choice)
-           # input("Enter: Next turn")
-            self.herd.choice.attack(self.fleet.choice)
-            #input("Enter: Next turn")
-        # ?: run the math for the fighting
-            if self.fleet.choice.health < 0:
-                self.fleet.list.remove(self.fleet.choice)#successfully removed robot from the list
-                #make it reselct a new robot
+        while len(self.fleet.list_robo) > 0 and len(self.herd.list_dino)> 0:
 
-            if self.herd.choice.health < 0:
-                self.herd.list.remove(self.herd.choice)
-
-
-    def display_winner(self):
-        if self.robot.health <= 0:
-            print(f"{self.dinosaur.name} wins!")
-        if self.dinosaur.health <= 0:
-            print(f"{self.robot.name} wins!")
+            self.current_robot = random.choice(self.fleet.list_robo)
+            self.current_dino = random.choice(self.herd.list_dino)
             
-    # ?: if x healt = 0, print the opposite win, so if dino.hp = 0 then robot wins
+            self.current_robot.attack(self.current_dino)
+            
+            print(f"{self.current_dino.name} took {self.current_robot.active_weapon.attack_power} damage! \n {self.current_dino.name} has {self.current_dino.health} HP left!")
+            
+            for d in self.herd.list_dino:
+                if (d).health <= 0:
+                    self.herd.list_dino.remove(d) #print d has fallen
+                    print(f"{(d).name} has fallen!!")
 
-# dino_test = Dinosaur("Test", 50)
-# robo_test = Robot("T35T")
+            self.current_dino.attack(self.current_robot)
+            
+            print(f"""{self.current_robot.name} took {self.current_dino.attack_power} damage! \n {self.current_robot.name} has {self.current_robot.health} HP left!""")
 
-# robo_test.attack(dino_test)
+            for r in self.fleet.list_robo:
+                if (r).health <= 0:
+                    self.fleet.list_robo.remove(r)
+                    print(f"{(r).name} has fallen!!")
+            input("Next Round!: Enter")
+            
+    def display_winner(self):
+        if len(self.fleet.list_robo) == 0:
+            print("\n DINOS WIN")
+        if len(self.herd.list_dino) == 0:
+            print("\n ROBOTS WIN")

@@ -1,5 +1,7 @@
 from battlefield_mod import Battlefield
 
 
-game = Battlefield().run_game()
+game = Battlefield()
+
+game.run_game()
 
